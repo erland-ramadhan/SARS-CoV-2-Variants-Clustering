@@ -64,3 +64,23 @@ Each respective clustering method folder includes the following:
 - RFT/
   - Clustering after applying a kernel-based method called Random Fourier Features (RFT).
   - RFT is an unsupervised approach, which maps the input data to a randomized low dimensional feature space (Euclidean inner product space) to get an approximate representation of data in lower dimensions $D$  from the original dimensions $d$.
+
+To perform clustering on feature vectors, run:
+
+```
+python clusteringMethod_featureSelection.py
+```
+
+Here, replace `clusteringMethod` with `kmeans`, `kmodes`, or `fuzzy` and `featureSelection` with `org`, `Boruta`, `Lasso`, or `RFT`.
+
+Next, create a contingency table by executing:
+
+```
+python new_cnt.py
+```
+
+Finally, calculate $F_1$ scores of the clustering method by running:
+
+```
+python Calculate_F1.py
+```
