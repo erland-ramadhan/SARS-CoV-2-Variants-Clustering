@@ -36,7 +36,7 @@ number_of_clusters = 5 #number of clusters
 print("Number of Clusters = ", number_of_clusters)
 clust_num = number_of_clusters
 
-fcm = FCM(n_clusters=clust_num, random_state=0)
+fcm = FCM(n_clusters=clust_num)
 fcm.fit(X)
 fcm_centers = fcm.centers
 labels = fcm.predict(X)

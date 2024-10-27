@@ -1,3 +1,5 @@
+import csv
+import os
 import pandas as pd
 import numpy as np
 import time
@@ -5,10 +7,7 @@ from sklearnex import patch_sklearn
 patch_sklearn()
 
 from sklearn.kernel_approximation import RBFSampler
-
-import csv
-import os
-
+from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
 from fcmeans import FCM
 
 print("Packages Loaded!!!")
@@ -33,8 +32,6 @@ print("Attribute data preprocessing Done")
 
 y =  np.array(int_variants)
 
-from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
-# sss = ShuffleSplit(n_splits=1, test_size=0.9)
 sss = StratifiedShuffleSplit(n_splits=1, test_size=0.9)
 train_index, test_index = next(sss.split(X, y))
 
@@ -66,7 +63,7 @@ number_of_clusters = 5 #number of clusters
 print("Number of Clusters = ",number_of_clusters)
 clust_num = number_of_clusters
 
-fcm = FCM(n_clusters=clust_num, random_state=0)
+fcm = FCM(n_clusters=clust_num)
 fcm.fit(X_features_test_RFT)
 fcm_centers = fcm.centers
 labels = fcm.predict(X_features_test_RFT)

@@ -4,7 +4,9 @@ import time
 from sklearnex import patch_sklearn
 patch_sklearn()
 
+from sklearn.cluster import KMeans
 from sklearn.kernel_approximation import RBFSampler
+from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
 
 import csv
 import os
@@ -31,8 +33,6 @@ print("Attribute data preprocessing Done")
 
 y =  np.array(int_variants, dtype=np.uint8)
 
-from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
-# sss = ShuffleSplit(n_splits=1, test_size=0.9)
 sss = StratifiedShuffleSplit(test_size=0.9)
 sss.get_n_splits(X, y)
 train_index, test_index = next(sss.split(X, y))
@@ -50,9 +50,8 @@ print("Feature Dimensino Reduction Starts here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 start_time_ = time.time()
 
-rbf_feature = RBFSampler(n_components=500, random_state=0)
+rbf_feature = RBFSampler(n_components=500)
 X_features_train = rbf_feature.fit_transform(X_train)
-# X_features_train = rbf_feature.fit(X_train, y_train)
 X_features_test_RFT = rbf_feature.transform(X)
 
 end_time_ = time.time() - start_time_
@@ -61,17 +60,12 @@ print("Feature Dimension Reduction Time in seconds =>",end_time_)
 
 start_time = time.time()
 
-#for clustering, the input data is in variable X_features_test
-from sklearn.cluster import KMeans
-
 number_of_clusters = 5 #number of clusters
 
 print("Number of Clusters = ",number_of_clusters)
 clust_num = number_of_clusters
 
-# kmeans = KMeans(n_clusters=clust_num, random_state=0, n_init='auto').fit(X_features_test_RFT)
-kmeans = KMeans(n_clusters=clust_num, random_state=0, n_init=10)
-# kmean_clust_labels = kmeans.labels_
+kmeans = KMeans(n_clusters=clust_num, n_init='auto')
 kmean_clust_labels = kmeans.fit_predict(X_features_test_RFT)
 
 np.save(os.getcwd() + '/new_Labels_kmeans_RFT.npy', kmean_clust_labels)

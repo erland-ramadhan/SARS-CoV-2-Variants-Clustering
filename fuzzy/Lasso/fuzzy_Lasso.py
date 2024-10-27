@@ -7,10 +7,10 @@ patch_sklearn()
 import csv
 import os
 
-from sklearn.linear_model import Lasso, LogisticRegression
 from sklearn.feature_selection import SelectFromModel
+from sklearn.linear_model import Lasso, LogisticRegression
+from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
 from sklearn.preprocessing import StandardScaler
-
 from fcmeans import FCM
 
 print("Packages Loaded!!!")
@@ -35,10 +35,7 @@ print("Attribute data preprocessing Done")
 
 y =  np.array(int_variants, dtype=np.uint8)
 
-from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
-# sss = ShuffleSplit(n_splits=1, test_size=0.9)
 sss = StratifiedShuffleSplit(n_splits=1, test_size=0.9)
-# sss.get_n_splits(X, y)
 train_index, test_index = next(sss.split(X, y))
 
 X_train, X_test = X[train_index], X[test_index]
@@ -57,7 +54,7 @@ start_time_ = time.time()
 scaler = StandardScaler()
 
 # L1 = Lasso, L2 = Ridge
-sel_ = SelectFromModel(estimator=LogisticRegression(n_jobs=-1, penalty='l1', solver='liblinear', random_state=0))
+sel_ = SelectFromModel(estimator=LogisticRegression(n_jobs=-1, penalty='l1', solver='liblinear'))
 sel_.fit(scaler.fit_transform(X_train), y_train)
 
 print('total features: {}'.format(X_train.shape[1]))
@@ -77,7 +74,7 @@ number_of_clusters = 5 #number of clusters
 print("Number of Clusters = ", number_of_clusters)
 clust_num = number_of_clusters
 
-fcm = FCM(n_clusters=clust_num, random_state=0)
+fcm = FCM(n_clusters=clust_num)
 fcm.fit(X_features_test)
 fcm_centers = fcm.centers
 labels = fcm.predict(X_features_test)

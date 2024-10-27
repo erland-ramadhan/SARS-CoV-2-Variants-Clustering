@@ -8,7 +8,9 @@ import csv
 import os
 
 from boruta import BorutaPy
+from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
 
 print("Packages Loaded!!!")
 
@@ -32,7 +34,6 @@ print("Attribute data preprocessing Done")
 
 y =  np.array(int_variants, dtype=np.uint8)
 
-from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
 # sss = ShuffleSplit(n_splits=1, test_size=0.9)
 sss = StratifiedShuffleSplit(n_splits=1, test_size=0.9)
 sss.get_n_splits(X, y)
@@ -54,7 +55,7 @@ start_time_ = time.time()
 rf = RandomForestClassifier(n_jobs=-1, class_weight='balanced', max_depth=5)
 
 # define Boruta feature selection method
-feat_selector = BorutaPy(rf, n_estimators='auto', random_state=0)
+feat_selector = BorutaPy(rf, n_estimators='auto')
 
 # find all relevant features - 5 features should be selected
 feat_selector.fit(X_train, y_train)
@@ -69,17 +70,13 @@ print("Feature Dimension Reduction in seconds =>",end_time_)
 start_time = time.time()
 
 #for clustering, the input data is in variable X_features_test
-from sklearn.cluster import KMeans
-
 
 number_of_clusters = 5 #number of clusters
 
 print("Number of Clusters = ",number_of_clusters)
 clust_num = number_of_clusters
 
-# kmeans = KMeans(n_clusters=clust_num, random_state=0, n_init='auto').fit(X_features_test)
-kmeans = KMeans(n_clusters=clust_num, random_state=0, n_init=10)
-# kmean_clust_labels = kmeans.labels_
+kmeans = KMeans(n_clusters=clust_num, n_init='auto')
 kmean_clust_labels = kmeans.fit_predict(X_features_test)
 
 np.save(os.getcwd() + '/new_Labels_kmeans_Boruta.npy', kmean_clust_labels)

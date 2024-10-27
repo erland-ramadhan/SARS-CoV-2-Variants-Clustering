@@ -9,6 +9,7 @@ import os
 
 from boruta import BorutaPy
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
 from fcmeans import FCM
 
 print("Packages Loaded!!!")
@@ -33,8 +34,6 @@ print("Attribute data preprocessing Done")
 
 y =  np.array(int_variants, dtype=np.uint8)
 
-from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
-# sss = ShuffleSplit(n_splits=1, test_size=0.9)
 sss = StratifiedShuffleSplit(n_splits=1, test_size=0.9)
 train_index, test_index = next(sss.split(X, y))
 
@@ -54,7 +53,7 @@ start_time_ = time.time()
 rf = RandomForestClassifier(n_jobs=-1, class_weight='balanced', max_depth=5)
 
 # define Boruta feature selection method
-feat_selector = BorutaPy(rf, n_estimators='auto', random_state=0)
+feat_selector = BorutaPy(rf, n_estimators='auto')
 
 # find all relevant features - 5 features should be selected
 feat_selector.fit(X_train, y_train)
@@ -73,7 +72,7 @@ number_of_clusters = 5 #number of clusters
 print("Number of Clusters = ",number_of_clusters)
 clust_num = number_of_clusters
 
-fcm = FCM(n_clusters=clust_num, random_state=0)
+fcm = FCM(n_clusters=clust_num)
 fcm.fit(X_features_test)
 fcm_centers = fcm.centers
 labels = fcm.predict(X_features_test)
