@@ -9,3 +9,4 @@ dependencies:
   - matplotlib
   - boruta_py
   - kmodes
+  - tqdm
