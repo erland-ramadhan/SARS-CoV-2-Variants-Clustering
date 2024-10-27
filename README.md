@@ -61,10 +61,6 @@ Each respective clustering method folder includes the following:
   - Clustering after applying **L**east **A**bsolute **S**hrinkage and **S**election **O**perator (LASSO) regression.
   - LASSO is a specific case of the penalized least squares regression with $L_1$ penalty function.
   - By combining the good qualities of ridge regression and subset selection, LASSO can improve both model interpretability, and prediction regression.
-  - Its objective function are defined as
-    ```math
-    \min(\text{Sum of square residuals} + \alpha\times |\text{slope}|)
-    ```
-    where $\alpha\times |\text{slope}|$ is the penalty term.
 - RFT/
   - Clustering after applying a kernel-based method called Random Fourier Features (RFT).
+  - RFT is an unsupervised approach, which maps the input data to a randomized low dimensional feature space (Euclidean inner product space) to get an approximate representation of data in lower dimensions $D$  from the original dimensions $d$.
