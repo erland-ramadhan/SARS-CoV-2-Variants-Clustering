@@ -46,11 +46,21 @@ First, as stated in [What is this repo about?](#first-section), a $k$-mers-based
 python featureVec_Generator.py
 ```
 
-After generating the feature vectors and saving them in a NumPy binary files, clustering can be performed using the methods in each respective folder.
+After generating and saving feature vectors in a NumPy binary files, clustering can be performed using the methods in each respective folder.
 
-In each respective clustering methods folder, you will find folders as follows.
+Each respective clustering method folder includes the following:
 - org/
-  - Clustering is done without applying any feature selection method on the feature vectors.
-  - Longer runtime and low $F_1$ score.
+  - Clustering without feature selection applied to the feature vectors.
+  - Results in a longer runtime and lower $F_1$ score due to high dimensionality.
 - Boruta/
-  - Clustering is done after applying 
+  - Clustering after applying Boruta.
+  - Boruta is a supervised method that is made around the random forest (RF) classification algorithm.
+  - This works by creating shadow features so that the features do not compete among themselves, but rather they compete with randomized version of them.
+    - It then extracts the importance of each feature (corresponding to the class label) and only keeps the features that are above specific threshold of importance.
+- Lasso/
+  - Clustering after applying **L**east **A**bsolute **S**hrinkage and **S**election **O**perator (LASSO) regression.
+  - LASSO is a specific case of the penalized least squares regression with $L_1$ penalty function.
+  - By combining the good qualities of ridge regression and subset selection, LASSO can improve both model interpretability, and prediction regression.
+  - Its objective function are defined as $$\min(\text{Sum of square residuals} + \alpha\times |\text{slope}|)$$ where $\alpha\times |\text{slope}|$ is the penalty term.
+- RFT/
+  - Clustering after applying a kernel-based method called Random Fourier Features (RFT).
