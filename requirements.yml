@@ -1,0 +1,11 @@
+name: sars-cov-2_clustering
+channels:
+  - conda-forge
+dependencies:
+  - scikit-learn-intelex
+  - scikit-learn
+  - numpy
+  - pandas
+  - matplotlib
+  - boruta_py
+  - kmodes
