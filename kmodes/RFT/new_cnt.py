@@ -35,7 +35,7 @@ for i in range(len(Variants)):
     int_2 = int(Cluster_ids[i])
     cnt[int_1,int_2] = cnt[int_1,int_2] + 1
 
-write_path_112 = os.getcwd() + "/new_cnt_kmode_RFT_5cluster.csv"
+write_path_112 = os.getcwd() + "/new_cnt_kmodes_RFT_5cluster.csv"
 
 with open(write_path_112, 'w', newline='') as file:
     writer = csv.writer(file)
