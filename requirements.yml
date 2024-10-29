@@ -1,11 +1,10 @@
 name: sars-cov-2_clustering
 channels:
-  - https://software.repos.intel.com/python/conda/
   - conda-forge
 dependencies:
-  - python <3.11
+  - python =3.10
   - scikit-learn-intelex
-  - scikit-learn 
+  - scikit-learn
   - numpy
   - pandas
   - matplotlib
