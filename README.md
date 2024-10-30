@@ -95,3 +95,4 @@ The following are the results after running the repo on MacBook Pro 2020 with In
 <img src="./F1_scores.svg">
 
 ### Runtimes
+<img src="./Runtimes.svg">
