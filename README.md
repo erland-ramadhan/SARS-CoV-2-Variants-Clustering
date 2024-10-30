@@ -85,14 +85,22 @@ Finally, calculate $F_1$ scores of the clustering method by running:
 python Calculate_F1.py
 ```
 
-## Results
+## How about the performance?
 
-The following are the results after running the repo on MacBook Pro 2020 with Intel(R) i7 Core Processor.
+The following are the results after running the repo on MacBook Pro 2020 with Intel(R) i7 Core Processor. There are 62657 observations with 9261 features (due to k-mers with k set equal to 3).
 
-> The results for K-Modes and Fuzzy C-Means clustering on original feature vectors where feature selection is not applied on feature vectors.
+> Results for K-Modes and Fuzzy C-Means clustering on original feature vectors (without feature selection) are not available due to predicted runtimes exceeding a day.
 
 ### $F_1$ Scores
 <img src="./F1_scores.svg">
 
+The plots show high $F_1$ scores across variants when clustering feature vectors processed with LASSO feature selection. K-Modes and Fuzzy C-Means perform best, with K-Means also scoring high but exhibiting higher variance across Beta, Delta, and Epsilon variants.
+
 ### Runtimes
 <img src="./Runtimes.svg">
+
+The runtime comparison shows K-Modes as the slowest clustering method. K-Means with LASSO feature selection method is the fastest but doesn't achieve the higher $F_1$ scores seen on Fuzzy C-Means with LASSO feature selection method.
+
+## Don't Skip This!
+
+You can experiment with different methods and even larger spike protein sequence datasets, maybe also includes newer variants like Omicron.
