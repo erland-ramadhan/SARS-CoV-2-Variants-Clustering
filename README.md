@@ -94,7 +94,7 @@ The following are the results after running the repo on MacBook Pro 2020 with In
 ### $F_1$ Scores
 <img src="./F1_scores.svg">
 
-The plots show high $F_1$ scores across variants when clustering feature vectors processed with LASSO feature selection. K-Modes and Fuzzy C-Means perform best, with K-Means also scoring high but exhibiting higher variance across Beta, Delta, and Epsilon variants.
+The plots show high $F_1$ scores across variants when clustering feature vectors processed with LASSO feature selection method. K-Modes and Fuzzy C-Means perform best, with K-Means also scoring high but exhibiting higher variance across Beta, Delta, and Epsilon variants.
 
 ### Runtimes
 <img src="./Runtimes.svg">
