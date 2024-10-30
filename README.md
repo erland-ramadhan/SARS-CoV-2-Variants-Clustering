@@ -84,3 +84,13 @@ Finally, calculate $F_1$ scores of the clustering method by running:
 ```
 python Calculate_F1.py
 ```
+
+## Results
+
+The following are the results after running the repo on MacBook Pro 2020 with Intel(R) i7 Core Processor.
+
+> The results for K-Modes and Fuzzy C-Means clustering on original feature vectors where feature selection is not applied on feature vectors.
+
+### $F_1$ Scores
+![Alt text](./F1_scores.svg)
+<img src="./F1_scores.svg">
